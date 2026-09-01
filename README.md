@@ -2,11 +2,7 @@
 <img src="images/af-b-step_logo.svg" alt="drawing" width="300"/> 
 
 ---
-Table of content
 
-[[_TOC_]]
-
----
 
 # AFBSTEP-OMOP
 
