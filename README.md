@@ -176,6 +176,7 @@ The four companion tables exist because AFBOLD is a meta-analysis of monitoring 
 |---|---|---|
 | `study` | contributing study | Describes a source study: name, NCT number, sponsor, phase, start and end dates. |
 | `person_study` | person per study | Links a person to the study they were enrolled in, including the enrolment date. |
+| `study_attribute` | selected value, per study | Study-level attributes that allow more than one answer per study — e.g. country of data collection, data provision level. |
 | `device_specs` | episode | The device behind a monitoring episode: device concept, manufacturer/model, serial number, and the rhythm-detection **algorithm with its version**. |
 | `source` | external file reference | Points a row — typically an episode — to an externally stored raw file (CIED remote-monitoring report, Holter/ECG waveform, scanned document or letter) without storing binary content inside the CDM. |
 
