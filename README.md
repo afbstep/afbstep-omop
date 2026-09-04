@@ -163,7 +163,7 @@ AFBSTEP-OMOP is a **profile** of OMOP CDM, not a fork. Nothing in the stock sche
 
 | Aspect | Stock OMOP CDM | AFBSTEP-OMOP |
 |---|---|---|
-| Schema | 39 standard tables | unchanged, plus **4 companion tables**: `study`, `person_study`, `device_specs`, `source` |
+| Schema | 39 standard tables | unchanged, plus **5 companion tables**: `study`, `study_attribute`, `person_study`, `device_specs`, `source` |
 | Vocabulary | the full Athena registry, typically resolved online | a **pinned registry** of standard concepts that resolves offline and reproducibly, plus **custom AFBSTEP concepts** (`2000000000+` range) for meanings Athena does not cover |
 | Concept → table routing | a concept's `domain_id` determines its table | the registry names the target table explicitly; 23 concepts deliberately deviate from the domain convention (see Step 2) |
 | Table scope | any table may be used, none is enforced | tables are tiered **mandatory / expected / optional**; everything else is out of scope |
