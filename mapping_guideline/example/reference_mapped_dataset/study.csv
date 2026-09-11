@@ -1,0 +1,7 @@
+study_id,study_name,nct_number,contributor,extended_affiliate,extended_affiliate_detail,study_type_concept_id,n_data_subjects,study_start_date,study_end_date,median_follow_up_months,dataset_status_concept_id,transfer_frequency_concept_id
+1,AFBSTEP,NCT01234567,UKE,0,,2000013003,5000,2024-01-01,,18,2000013008,2000013010
+2,NORDIC-AF,NCT02345678,UKE,1,Herzzentrum Hamburg gGmbH,2000013001,412,2018-01-01,2023-12-31,36,2000013007,2000013009
+3,IDE-LOOP,,AMC Amsterdam,0,,2000013002,88,2020-01-01,2024-06-30,24,2000013007,2000013010
+4,RPM-REG,,Rigshospitalet,0,,2000013004,1740,2019-01-01,,30,2000013008,2000013010
+5,CLAIMS-FR,,CNAM,1,Assurance Maladie regional funds,2000013005,96000,2018-01-01,2022-12-31,48,2000013007,2000013009
+6,META-ONLY,,Karolinska,0,,2000013006,0,2022-01-01,,,2000013008,2000013009

@@ -1,0 +1,53 @@
+table,column,requirement,rationale
+person,person_id,required,Primary key. Every other table joins on it.
+person,gender_concept_id,required,Pinned to MALE/FEMALE. Used as a stratifier in every planned analysis.
+person,year_of_birth,required,Age at index is derived from it. No analysis is interpretable without age.
+person,birth_datetime,optional,"Finer precision than year_of_birth is not required by any AFBSTEP analysis, and full dates of birth are avoided where they are not needed."
+person,race_concept_id,optional,"NOT NULL in the CDM so a value must be present, but AFBSTEP does not require it to be informative; concept 0 is acceptable where a site does not collect it."
+person,ethnicity_concept_id,optional,"Same as race_concept_id: required by the DDL, not required to be informative by AFBSTEP."
+person,person_source_value,expected,Pseudonymised site identifier. Needed to trace a record back to the source system during mapping review.
+observation_period,observation_period_id,required,Primary key.
+observation_period,person_id,required,Foreign key to person.
+observation_period,observation_period_start_date,required,Opens the window in which absence of a record means absence of the finding.
+observation_period,observation_period_end_date,required,Closes that window. An open-ended period makes follow-up endpoints uninterpretable.
+observation_period,period_type_concept_id,required,Records how the period was derived. Pinned to 'Period while enrolled in study'.
+condition_occurrence,condition_occurrence_id,required,Primary key.
+condition_occurrence,person_id,required,Foreign key to person.
+condition_occurrence,condition_concept_id,required,The finding itself. Bound to the pinned condition concept set.
+condition_occurrence,condition_start_date,required,Places the condition relative to the index date; every endpoint definition depends on it.
+condition_occurrence,condition_end_date,expected,"Distinguishes a resolved condition from an ongoing one. Routinely absent for chronic comorbidities, so a partial threshold rather than a hard requirement."
+condition_occurrence,condition_type_concept_id,required,Provenance of the record. Pinned to 'EHR encounter diagnosis'.
+condition_occurrence,condition_status_concept_id,optional,Not used by any planned AFBSTEP analysis.
+condition_occurrence,condition_source_value,expected,The site's own code for the condition. Needed for the mapping review; may be absent where a condition was derived rather than coded.
+episode,episode_id,required,Primary key. episode_event and the custom extension tables key on it.
+episode,person_id,required,Foreign key to person.
+episode,episode_concept_id,required,"Distinguishes an aggregated AF-burden window (2000011002) from a disaggregated AF episode (2000011003); the whole AF-burden architecture depends on this discriminator. Where the specific arrhythmia type is known, an AF or atrial arrhythmia concept (e.g. 313217) may be used instead."
+episode,episode_type_concept_id,required,"Provenance of the record. Pinned to 32828 (EHR episode record), reflecting that episode rows are device-/EHR-generated rather than derived from a manually completed case report form, unlike measurement rows (32809)."
+episode,episode_start_date,required,Opens the monitoring window. AF burden is meaningless without the interval it was measured over.
+episode,episode_end_date,required,"Closes the monitoring window. Nullable in the CDM, but a burden percentage over an open-ended interval cannot be interpreted, so AFBSTEP requires it."
+episode,episode_object_concept_id,required,What the episode is about. Required by the CDM.
+episode,episode_number,expected,Orders repeated episodes within a person. Absent where a site reports a single aggregated window.
+episode_event,episode_id,required,Foreign key to episode.
+episode_event,event_id,required,Identifier of the linked measurement or observation row.
+episode_event,episode_event_field_concept_id,required,Says which table and column event_id points into; the link is unresolvable without it.measurement
+measurement,person_id,required,Foreign key to person.
+measurement,measurement_concept_id,required,"What was measured. Bound to the pinned measurement concepts, including AF burden as percent time in AF."
+measurement,measurement_date,required,Places the measurement in time.
+measurement,measurement_type_concept_id,required,Provenance of the measurement.
+measurement,value_as_number,expected,The measured quantity. AF burden is worthless without it; the threshold allows for measurements recorded only as a concept.
+measurement,unit_concept_id,expected,Unit of value_as_number. A burden of 30 is uninterpretable without knowing it is a percentage.
+observation,observation_id,required,Primary key.
+observation,person_id,required,Foreign key to person.
+observation,observation_concept_id,required,What was observed. Bound to the pinned AF-burden method and count concepts.
+observation,observation_date,required,Places the observation in time.
+observation,observation_type_concept_id,required,Provenance of the observation.
+device_specs,episode_id,required,Primary key and foreign key to episode.
+device_specs,person_id,required,Foreign key to person.
+device_specs,device_exposure_id,required,Foreign key to the device_exposure row identifying the monitoring device behind the episode.
+device_specs,device_algorithm,expected,"Detection algorithm name. Burden figures are not comparable across algorithms, so this is needed to interpret them."
+device_specs,device_algorithm_v,expected,"Detection algorithm version. Algorithms are revised between firmware releases, so the name alone does not identify the behaviour that produced a burden figure."
+device_specs,device_v,optional,"Device firmware version. Recorded where the site has it; burden stays interpretable without it once the algorithm and its version are known."
+device_exposure,device_concept_id,expected,"The kind of monitor behind an episode. Burden from an implanted device, a patch and a consumer wearable are not the same measurement."
+device_exposure,device_source_value,expected,"Manufacturer and model of the monitor, as the site records it. No standard concept distinguishes one manufacturer's wearable from another's, and detection behaviour differs between them, so the site's own string is what carries it."
+person_study,enrollment_date,expected,"Date the person entered the source study. Anchors per-person follow-up to the study timeline; expected rather than required because person_study itself is optional."
+death,cause_concept_id,expected,"Cause of death as a concept. Expected rather than required: a site may record the fact of death without an adjudicated cause."

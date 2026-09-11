@@ -1,0 +1,9 @@
+source_id,person_id,link_to_file,file_concept_id,source_event_id,source_event_field_concept_id
+1,1,./ext/CIED_P001_W1_report.pdf,2000010002,1,798885
+2,1,./ext/CIED_P001_W1_transmission.json,2000010004,1,798885
+3,16,./ext/CIED_P016_interrogation.pdf,2000010005,26,798885
+4,17,./ext/HOLTER_P017_raw.edf,2000010003,27,798885
+5,24,./ext/WEAR_P024_symptom_memo.m4a,2000010001,35,798885
+6,2,./ext/UKE_P002_labor_2024-02-20.pdf,2000010000,8,1147138
+7,3,./ext/UKE_P003_ehra_bogen_2024-03-01.pdf,2000010000,70,1147165
+8,1,./ext/UKE_P001_rezept_2024-01-10.pdf,2000010000,1,1147707

@@ -1,0 +1,42 @@
+[project]
+name = "afbstepomop"
+version = "0.1.0"
+description = "python package for mapping and validation clinical data sets into AFBSTEP-OMOP standard"
+readme = "README.md"
+requires-python = ">=3.13"
+
+# Deliberately empty. Partner sites install this package to validate an export,
+# often from inside restricted hospital networks where every extra wheel is an
+# obstacle. The specification loaders, the validator and the mock generator are
+# all standard library only, and should stay that way.
+dependencies = []
+
+[project.optional-dependencies]
+# Only needed to run the example notebook, or to explore a dataset with
+# dataframes. Nothing the package itself does requires these.
+example_pipeline = [
+    "pandas>=3.0.5",
+    "numpy>=2.5.2",
+    "ipykernel>=7.3.0",
+]
+
+[dependency-groups]
+dev = [
+    "pandas>=3.0.5",
+    "numpy>=2.5.2",
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# The specification is data shipped inside the package: without this, a wheel
+# contains the loaders but none of the DDL or CSV files they read.
+[tool.setuptools.package-data]
+afbstepomop = ["source/**/*"]

@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="984" height="952" viewBox="0 0 984 952" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    .tt { font-size: 15px; font-weight: 700; fill: #22303E }
+    .ts { font-size: 10.5px; fill: #55636F }
+    .grp { font-size: 12px; font-weight: 700; letter-spacing: 0.8px; fill: #607180 }
+    .sn { font-size: 15px; font-weight: 700; fill: #ffffff }
+    .sf { font-size: 10.5px; fill: #ffffff; opacity: 0.92 }
+    .lg { font-size: 12px; fill: #d3dfe8 }
+    .fn { font-size: 11px; fill: #55636F }
+  </style>
+<text x="520" y="50" class="grp">AF-B-STEP CDM TABLES</text>
+  <line x1="520" y1="58" x2="960" y2="58" stroke="#607180" stroke-width="1.5" opacity="0.55"/>
+  <rect x="520" y="68" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cperson"><rect x="520" y="68" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cperson)">
+  <rect x="520" y="68.0" width="7" height="44.0" fill="#177C76"/>
+  </g>
+  <text x="542" y="87" class="tt">person</text>
+  <text x="542" y="102" class="ts">one row per person</text>
+  <rect x="520" y="119" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cobservation_period"><rect x="520" y="119" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cobservation_period)">
+  <rect x="520" y="119.0" width="7" height="44.0" fill="#177C76"/>
+  </g>
+  <text x="542" y="138" class="tt">observation_period</text>
+  <text x="542" y="153" class="ts">incl_date to last_contact_date</text>
+  <rect x="520" y="170" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cvisit_occurrence"><rect x="520" y="170" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cvisit_occurrence)">
+  <rect x="520" y="170.0" width="7" height="22.0" fill="#177C76"/>
+  <rect x="520" y="192.0" width="7" height="22.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="189" class="tt">visit_occurrence</text>
+  <text x="542" y="204" class="ts">rec_kind = admission</text>
+  <rect x="520" y="221" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="ccondition_occurrence"><rect x="520" y="221" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#ccondition_occurrence)">
+  <rect x="520" y="221.0" width="7" height="22.0" fill="#177C76"/>
+  <rect x="520" y="243.0" width="7" height="22.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="240" class="tt">condition_occurrence</text>
+  <text x="542" y="255" class="ts">comorbidity flags, ICD-10, complications</text>
+  <rect x="520" y="272" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cdrug_exposure"><rect x="520" y="272" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cdrug_exposure)">
+  <rect x="520" y="272.0" width="7" height="22.0" fill="#177C76"/>
+  <rect x="520" y="294.0" width="7" height="22.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="291" class="tt">drug_exposure</text>
+  <text x="542" y="306" class="ts">rec_kind = med, medN_* columns</text>
+  <rect x="520" y="323" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cprocedure_occurrence"><rect x="520" y="323" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cprocedure_occurrence)">
+  <rect x="520" y="323.0" width="7" height="22.0" fill="#177C76"/>
+  <rect x="520" y="345.0" width="7" height="22.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="342" class="tt">procedure_occurrence</text>
+  <text x="542" y="357" class="ts">rec_kind = procedure, OPS codes</text>
+  <rect x="520" y="374" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cdevice_exposure"><rect x="520" y="374" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cdevice_exposure)">
+  <rect x="520" y="374.0" width="7" height="14.7" fill="#177C76"/>
+  <rect x="520" y="388.7" width="7" height="14.7" fill="#AD580C"/>
+  <rect x="520" y="403.3" width="7" height="14.7" fill="#7461BD"/>
+  </g>
+  <text x="542" y="393" class="tt">device_exposure</text>
+  <text x="542" y="408" class="ts">the device, plus its ablation energy source</text>
+  <rect x="520" y="425" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cmeasurement"><rect x="520" y="425" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cmeasurement)">
+  <rect x="520" y="425.0" width="7" height="22.0" fill="#177C76"/>
+  <rect x="520" y="447.0" width="7" height="22.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="444" class="tt">measurement</text>
+  <text x="542" y="459" class="ts">labs, vitals, AF burden, peak rate</text>
+  <rect x="520" y="476" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cobservation"><rect x="520" y="476" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cobservation)">
+  <rect x="520" y="476.0" width="7" height="14.7" fill="#177C76"/>
+  <rect x="520" y="490.7" width="7" height="14.7" fill="#AD580C"/>
+  <rect x="520" y="505.3" width="7" height="14.7" fill="#7461BD"/>
+  </g>
+  <text x="542" y="495" class="tt">observation</text>
+  <text x="542" y="510" class="ts">questions, answers and missingness</text>
+  <rect x="520" y="527" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cdeath"><rect x="520" y="527" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cdeath)">
+  <rect x="520" y="527.0" width="7" height="44.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="546" class="tt">death</text>
+  <text x="542" y="561" class="ts">rec_kind = death</text>
+  <rect x="520" y="578" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cepisode"><rect x="520" y="578" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cepisode)">
+  <rect x="520" y="578.0" width="7" height="44.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="597" class="tt">episode</text>
+  <text x="542" y="612" class="ts">rec_kind = window | episode</text>
+  <rect x="520" y="629" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cepisode_event"><rect x="520" y="629" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cepisode_event)">
+  <rect x="520" y="629.0" width="7" height="44.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="648" class="tt">episode_event</text>
+  <text x="542" y="663" class="ts">nesting between episodes</text>
+  <rect x="520" y="680" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="csource"><rect x="520" y="680" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#csource)">
+  <rect x="520" y="680.0" width="7" height="22.0" fill="#177C76"/>
+  <rect x="520" y="702.0" width="7" height="22.0" fill="#AD580C"/>
+  </g>
+  <text x="542" y="699" class="tt">source</text>
+  <text x="542" y="714" class="ts">rec_kind = file, plus scanned documents</text>
+  <rect x="520" y="731" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cdevice_specs"><rect x="520" y="731" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cdevice_specs)">
+  <rect x="520" y="731.0" width="7" height="22.0" fill="#AD580C"/>
+  <rect x="520" y="753.0" width="7" height="22.0" fill="#7461BD"/>
+  </g>
+  <text x="542" y="750" class="tt">device_specs</text>
+  <text x="542" y="765" class="ts">per episode: algorithm, serial, hardware</text>
+  <rect x="520" y="782" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cstudy"><rect x="520" y="782" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cstudy)">
+  <rect x="520" y="782.0" width="7" height="44.0" fill="#4571A7"/>
+  </g>
+  <text x="542" y="801" class="tt">study</text>
+  <text x="542" y="816" class="ts">entry_kind = meta</text>
+  <rect x="520" y="833" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cstudy_attribute"><rect x="520" y="833" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cstudy_attribute)">
+  <rect x="520" y="833.0" width="7" height="44.0" fill="#4571A7"/>
+  </g>
+  <text x="542" y="852" class="tt">study_attribute</text>
+  <text x="542" y="867" class="ts">entry_kind = country | provision</text>
+  <rect x="520" y="884" width="440" height="44" rx="6" fill="#F8F6F2" stroke="#A79E90"/>
+  <clipPath id="cperson_study"><rect x="520" y="884" width="7" height="44" rx="6"/></clipPath>
+  <g clip-path="url(#cperson_study)">
+  <rect x="520" y="884.0" width="7" height="44.0" fill="#4571A7"/>
+  </g>
+  <text x="542" y="903" class="tt">person_study</text>
+  <text x="542" y="918" class="ts">entry_kind = arm | enrollment</text>
+  <text x="36" y="210" class="grp">TYPICAL INITIAL TABLES</text>
+  <line x1="36" y1="218" x2="332" y2="218" stroke="#607180" stroke-width="1.5" opacity="0.55"/>
+  <rect x="36" y="228" width="296" height="104" rx="8" fill="#177C76"/>
+  <text x="54" y="258" class="sn">baseline</text>
+  <text x="54" y="278" class="sf">reference_baseline.csv</text>
+  <text x="54" y="300" class="sf">one row per person</text>
+  <text x="54" y="316" class="sf">wide: histN_*, medN_* groups</text>
+  <rect x="36" y="362" width="296" height="104" rx="8" fill="#AD580C"/>
+  <text x="54" y="392" class="sn">followup</text>
+  <text x="54" y="412" class="sf">reference_followup.csv</text>
+  <text x="54" y="434" class="sf">one row per record</text>
+  <text x="54" y="450" class="sf">rec_kind names the row type</text>
+  <rect x="36" y="496" width="296" height="104" rx="8" fill="#7461BD"/>
+  <text x="54" y="526" class="sn">device_registry</text>
+  <text x="54" y="546" class="sf">reference_device_registry.csv</text>
+  <text x="54" y="568" class="sf">one row per device</text>
+  <text x="54" y="584" class="sf">dev_id, referenced as dev_ref</text>
+  <rect x="36" y="630" width="296" height="104" rx="8" fill="#4571A7"/>
+  <text x="54" y="660" class="sn">study_information</text>
+  <text x="54" y="680" class="sf">reference_study_information.csv</text>
+  <text x="54" y="702" class="sf">one row per fact</text>
+  <text x="54" y="718" class="sf">entry_kind names the grain</text>
+  <path d="M 332 237.5 H 417 A 7 7 0 0 0 424 230.5 V 97.0 A 7 7 0 0 1 431 90.0 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 85.8 L 519 90.0 L 511 94.2 Z" fill="#177C76"/>
+  <path d="M 332 246.9 H 417 A 7 7 0 0 0 424 239.9 V 148.0 A 7 7 0 0 1 431 141.0 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 136.8 L 519 141.0 L 511 145.2 Z" fill="#177C76"/>
+  <path d="M 332 256.4 H 417 A 7 7 0 0 0 424 249.4 V 191.7 A 7 7 0 0 1 431 184.7 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 180.5 L 519 184.7 L 511 188.9 Z" fill="#177C76"/>
+  <path d="M 332 265.8 H 417 A 7 7 0 0 0 424 258.8 V 242.7 A 7 7 0 0 1 431 235.7 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 231.5 L 519 235.7 L 511 239.9 Z" fill="#177C76"/>
+  <path d="M 332 275.3 H 417 A 7 7 0 0 1 424 282.3 V 279.7 A 7 7 0 0 0 431 286.7 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 282.5 L 519 286.7 L 511 290.9 Z" fill="#177C76"/>
+  <path d="M 332 284.7 H 417 A 7 7 0 0 1 424 291.7 V 330.7 A 7 7 0 0 0 431 337.7 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 333.5 L 519 337.7 L 511 341.9 Z" fill="#177C76"/>
+  <path d="M 332 294.2 H 417 A 7 7 0 0 1 424 301.2 V 378.0 A 7 7 0 0 0 431 385.0 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 380.8 L 519 385.0 L 511 389.2 Z" fill="#177C76"/>
+  <path d="M 332 303.6 H 417 A 7 7 0 0 1 424 310.6 V 432.7 A 7 7 0 0 0 431 439.7 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 435.5 L 519 439.7 L 511 443.9 Z" fill="#177C76"/>
+  <path d="M 332 313.1 H 417 A 7 7 0 0 1 424 320.1 V 480.0 A 7 7 0 0 0 431 487.0 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 482.8 L 519 487.0 L 511 491.2 Z" fill="#177C76"/>
+  <path d="M 332 322.5 H 417 A 7 7 0 0 1 424 329.5 V 687.7 A 7 7 0 0 0 431 694.7 H 511" fill="none" stroke="#177C76" stroke-width="1.8"/>
+  <path d="M 511 690.5 L 519 694.7 L 511 698.9 Z" fill="#177C76"/>
+  <path d="M 332 370.0 H 443 A 7 7 0 0 0 450 363.0 V 206.3 A 7 7 0 0 1 457 199.3 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 195.1 L 519 199.3 L 511 203.5 Z" fill="#AD580C"/>
+  <path d="M 332 378.0 H 443 A 7 7 0 0 0 450 371.0 V 257.3 A 7 7 0 0 1 457 250.3 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 246.1 L 519 250.3 L 511 254.5 Z" fill="#AD580C"/>
+  <path d="M 332 386.0 H 443 A 7 7 0 0 0 450 379.0 V 308.3 A 7 7 0 0 1 457 301.3 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 297.1 L 519 301.3 L 511 305.5 Z" fill="#AD580C"/>
+  <path d="M 332 394.0 H 443 A 7 7 0 0 0 450 387.0 V 359.3 A 7 7 0 0 1 457 352.3 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 348.1 L 519 352.3 L 511 356.5 Z" fill="#AD580C"/>
+  <path d="M 332 402.0 H 443 A 7 7 0 0 0 450 395.0 V 403.0 A 7 7 0 0 1 457 396.0 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 391.8 L 519 396.0 L 511 400.2 Z" fill="#AD580C"/>
+  <path d="M 332 410.0 H 443 A 7 7 0 0 1 450 417.0 V 447.3 A 7 7 0 0 0 457 454.3 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 450.1 L 519 454.3 L 511 458.5 Z" fill="#AD580C"/>
+  <path d="M 332 418.0 H 443 A 7 7 0 0 1 450 425.0 V 491.0 A 7 7 0 0 0 457 498.0 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 493.8 L 519 498.0 L 511 502.2 Z" fill="#AD580C"/>
+  <path d="M 332 426.0 H 443 A 7 7 0 0 1 450 433.0 V 542.0 A 7 7 0 0 0 457 549.0 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 544.8 L 519 549.0 L 511 553.2 Z" fill="#AD580C"/>
+  <path d="M 332 434.0 H 443 A 7 7 0 0 1 450 441.0 V 593.0 A 7 7 0 0 0 457 600.0 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 595.8 L 519 600.0 L 511 604.2 Z" fill="#AD580C"/>
+  <path d="M 332 442.0 H 443 A 7 7 0 0 1 450 449.0 V 644.0 A 7 7 0 0 0 457 651.0 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 646.8 L 519 651.0 L 511 655.2 Z" fill="#AD580C"/>
+  <path d="M 332 450.0 H 443 A 7 7 0 0 1 450 457.0 V 702.3 A 7 7 0 0 0 457 709.3 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 705.1 L 519 709.3 L 511 713.5 Z" fill="#AD580C"/>
+  <path d="M 332 458.0 H 443 A 7 7 0 0 1 450 465.0 V 738.7 A 7 7 0 0 0 457 745.7 H 511" fill="none" stroke="#AD580C" stroke-width="1.8"/>
+  <path d="M 511 741.5 L 519 745.7 L 511 749.9 Z" fill="#AD580C"/>
+  <path d="M 332 522.0 H 391 A 7 7 0 0 0 398 515.0 V 414.0 A 7 7 0 0 1 405 407.0 H 511" fill="none" stroke="#7461BD" stroke-width="1.8"/>
+  <path d="M 511 402.8 L 519 407.0 L 511 411.2 Z" fill="#7461BD"/>
+  <path d="M 332 548.0 H 391 A 7 7 0 0 0 398 541.0 V 516.0 A 7 7 0 0 1 405 509.0 H 511" fill="none" stroke="#7461BD" stroke-width="1.8"/>
+  <path d="M 511 504.8 L 519 509.0 L 511 513.2 Z" fill="#7461BD"/>
+  <path d="M 332 574.0 H 391 A 7 7 0 0 1 398 581.0 V 753.3 A 7 7 0 0 0 405 760.3 H 511" fill="none" stroke="#7461BD" stroke-width="1.8"/>
+  <path d="M 511 756.1 L 519 760.3 L 511 764.5 Z" fill="#7461BD"/>
+  <path d="M 332 656.0 H 365 A 7 7 0 0 1 372 663.0 V 797.0 A 7 7 0 0 0 379 804.0 H 511" fill="none" stroke="#4571A7" stroke-width="1.8"/>
+  <path d="M 511 799.8 L 519 804.0 L 511 808.2 Z" fill="#4571A7"/>
+  <path d="M 332 682.0 H 365 A 7 7 0 0 1 372 689.0 V 848.0 A 7 7 0 0 0 379 855.0 H 511" fill="none" stroke="#4571A7" stroke-width="1.8"/>
+  <path d="M 511 850.8 L 519 855.0 L 511 859.2 Z" fill="#4571A7"/>
+  <path d="M 332 708.0 H 365 A 7 7 0 0 1 372 715.0 V 899.0 A 7 7 0 0 0 379 906.0 H 511" fill="none" stroke="#4571A7" stroke-width="1.8"/>
+  <path d="M 511 901.8 L 519 906.0 L 511 910.2 Z" fill="#4571A7"/>
+</svg>

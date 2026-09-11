@@ -1,0 +1,47 @@
+concept_id,CDM_table,CDM_variable,unit_concept_id,min_value,max_value,rationale
+3027172,measurement,value_as_number,8554,0,100,Left ventricular ejection fraction is a percentage; a value above 100 means a fraction was multiplied twice or a different quantity was mapped here.
+3027018,measurement,value_as_number,8483,20,300,Resting heart rate in counts per minute.
+3004249,measurement,value_as_number,8876,50,300,Systolic blood pressure in mmHg.
+3012888,measurement,value_as_number,8876,20,200,Diastolic blood pressure in mmHg.
+3025315,measurement,value_as_number,9529,20,350,Body weight in kilograms; the lower bound catches weights recorded in stones or pounds.
+3036277,measurement,value_as_number,8582,100,250,Body height in centimetres; values below 100 usually mean metres were reported.
+3000963,measurement,value_as_number,8636,20,250,Haemoglobin in grams per litre; values below 20 usually mean grams per decilitre were reported.
+3016723,measurement,value_as_number,8840,0.1,20,Serum creatinine in milligrams per decilitre; values above 20 usually mean micromoles per litre were reported.
+3029187,measurement,value_as_number,8845,0,70000,NT-proBNP in picograms per millilitre. The upper bound is deliberately permissive; extreme values occur in decompensated heart failure.
+37017409,measurement,value_as_number,,0,9,CHA2DS2-VASc is an integer score with a maximum of 9. Unitless.
+2000002000,measurement,value_as_number,,0,8,"CHA2DS2-VA is the sex-agnostic variant of CHA2DS2-VASc and drops the sex category, so its maximum is 8. Unitless."
+45766893,measurement,value_as_number,,0,9,HAS-BLED is an integer score with a maximum of 9. Unitless.
+2000008002,measurement,value_as_number,8554,0,100,"AF burden is a proportion of monitored time expressed as a percentage; values outside 0-100 indicate the site reported hours or a fraction instead. Only valid within an aggregated burden window (Case A), since it summarises AF time over a continuous monitoring period rather than a single episode."
+2000008007,observation,value_as_number,8554,0,100,"Fraction of days in sinus rhythm, expressed as a percentage over the monitoring window. Only valid within an aggregated burden window (Case A)."
+2000008008,observation,value_as_number,,0,,Number of analysable ECGs in the monitoring period; denominator for intermittent AF-burden estimation. Only valid within an aggregated burden window (Case A).
+2000008009,observation,value_as_number,,0,,Number of ECGs classified as AF in the monitoring period; numerator for intermittent AF-burden estimation. Must not exceed the corresponding N_ECG_TOTAL value. Only valid within an aggregated burden window (Case A).
+2000009003,observation,value_as_number,8555,0,,Duration of a single arrhythmia episode in seconds. Only valid within a disaggregated episode (Case B). No upper bound: AF episodes can persist for days before resolving or transitioning into a monitored window. Lower bound of 0 catches negative or malformed values.
+2000009004,measurement,value_as_number,8483,20,300,"Maximum atrial or ventricular rate during an arrhythmia episode. Generous bounds intended to catch unit and transcription errors, not to define clinical normality. Only valid within a disaggregated episode (Case B), since a peak rate describes a single event, not a multi-day window."
+2000009006,observation,value_as_number,,0,100,"AFEQT (Atrial Fibrillation Effect on QualiTy-of-life) total score, normalized from 7-point Likert-scale items to a 0-100 range (higher = better quality of life). Unitless, like the other composite scores. Not scoped to a specific episode type, since it reflects overall patient-reported burden rather than a single monitoring window or episode."
+2000009013,measurement,value_as_number,8555,0,,Longest AF episode duration in seconds within the window. No upper bound (see 2000009003 rationale).
+2000009014,measurement,value_as_number,8555,0,,Shortest AF episode duration in seconds within the window.
+2000009015,measurement,value_as_number,8555,0,,Mean AF episode duration in seconds within the window.
+2000009016,measurement,value_as_number,8555,0,,SD of AF episode duration in seconds within the window.
+2000009017,measurement,value_as_number,8483,20,300,"Mean ventricular rate during AF in counts per minute, same bounds as peak rate (2000009004)."
+2000009018,measurement,value_as_number,8483,0,150,SD of mean ventricular rate during AF in counts per minute.
+2000009019,measurement,value_as_number,,0,,"Total beat count within a single AF episode. Unitless (count), no upper bound."
+2000009020,measurement,value_as_number,,0,,"Count of discrete AF episodes within the window. Unitless, no upper bound."
+2000009021,measurement,value_as_number,8555,0,,Absolute AF duration in seconds within the window. No upper bound.
+2000009023,measurement,value_as_number,8554,0,100,Percent atrial paced.
+2000009024,measurement,value_as_number,8554,0,100,Percent ventricular paced.
+2000009025,measurement,value_as_number,,0,,AT/AF shock count. Unitless.
+2000009026,measurement,value_as_number,,0,,VT/VF shock count. Unitless.
+2000009027,measurement,value_as_number,8555,0,86400,"Daily device-measured activity duration in seconds; upper bound is a full day (86400 s)."
+2000009028,measurement,value_as_number,,0,,Fluid status threshold crossing count. Unitless.
+2000009029,measurement,value_as_number,,0,,Daily spontaneous NST episode count. Unitless.
+2000009030,measurement,value_as_number,8554,0,100,PVC burden as percent of total beats.
+2000009031,measurement,value_as_number,9618,0,,Daily thoracic impedance in ohms. No upper bound; devices typically report values in the hundreds of ohms.
+2000009032,measurement,value_as_number,9618,0,,"Accumulated thoracic impedance deviation in ohms, cumulative over time. No upper bound."
+2000009033,measurement,value_as_number,9618,0,,Reference thoracic impedance baseline in ohms.
+3006307,measurement,value_as_number,9593,0,,"R-R interval mean, milliseconds."
+46235177,measurement,value_as_number,9593,0,,"R-R interval maximum, milliseconds."
+46235178,measurement,value_as_number,9593,0,,"R-R interval minimum, milliseconds."
+21491502,measurement,value_as_number,9593,0,,"R-R interval standard deviation (heart rate variability), milliseconds."
+2000009035,measurement,value_as_number,8483,20,300,"Daytime resting heart rate, counts per minute."
+2000009036,measurement,value_as_number,8483,20,300,"Nighttime resting heart rate, counts per minute."
+2000009037,measurement,value_as_number,8483,20,300,"Max heart rate during AF within window, counts per minute."

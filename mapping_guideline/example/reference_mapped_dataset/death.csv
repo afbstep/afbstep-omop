@@ -1,0 +1,5 @@
+person_id,death_date,death_datetime,death_type_concept_id,cause_concept_id,cause_source_value,cause_source_concept_id
+1,2024-11-14,,44803317,2000006001,"cardiovascular, unspec.",
+3,2024-08-22,,44803317,443392,malignancy,
+9,2019-08-03,,44803317,4329847,MI,
+22,2022-11-30,,44803317,2000006002,stroke,

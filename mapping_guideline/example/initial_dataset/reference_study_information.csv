@@ -1,0 +1,121 @@
+study_id,entry_kind,pat_id,entry_key,entry_value,entry_note
+S1,meta,,study_name,AFBSTEP,
+S1,meta,,nct,NCT01234567,
+S1,meta,,contributor,UKE,
+S1,meta,,ext_affiliate,0,
+S1,meta,,ext_affiliate_name,,
+S1,meta,,study_kind,OBS-COHORT,
+S1,meta,,n_subjects,5000,
+S1,meta,,data_from,2024-01-01,
+S1,meta,,data_to,,
+S1,meta,,median_fu_months,18,
+S1,meta,,ds_status,rolling,
+S1,meta,,transfer_mode,periodic,
+S1,country,,,IT,
+S1,country,,,IN,
+S1,provision,,,TAB,
+S1,provision,,,TAB+SIG,
+S1,arm,,,Physical Intervention,treatment
+S1,arm,,,Clinical Intervention,treatment
+S1,arm,,,Control,control
+S1,enrollment,P-001,,Physical Intervention,2024-02-01
+S1,enrollment,P-002,,Clinical Intervention,2024-02-03
+S1,enrollment,P-003,,Control,2024-02-05
+S2,meta,,study_name,NORDIC-AF,
+S2,meta,,nct,NCT02345678,
+S2,meta,,contributor,UKE,
+S2,meta,,ext_affiliate,1,
+S2,meta,,ext_affiliate_name,Herzzentrum Hamburg gGmbH,
+S2,meta,,study_kind,RCT,
+S2,meta,,n_subjects,412,
+S2,meta,,data_from,2018-01-01,
+S2,meta,,data_to,2023-12-31,
+S2,meta,,median_fu_months,36,
+S2,meta,,ds_status,locked,
+S2,meta,,transfer_mode,single,
+S2,country,,,DE,
+S2,provision,,,TAB+IMG,
+S2,arm,,,Arm A - Ablation,treatment
+S2,arm,,,Arm B - Placebo,placebo
+S2,enrollment,P-005,,Arm A - Ablation,2019-07-18
+S2,enrollment,P-006,,Arm B - Placebo,2019-07-24
+S2,enrollment,P-007,,Arm A - Ablation,2019-01-15
+S2,enrollment,P-008,,Arm B - Placebo,2020-07-17
+S2,enrollment,P-009,,Arm A - Ablation,2018-04-25
+S2,enrollment,P-026,,Arm A - Ablation,2018-11-29
+S3,meta,,study_name,IDE-LOOP,
+S3,meta,,nct,,
+S3,meta,,contributor,AMC Amsterdam,
+S3,meta,,ext_affiliate,0,
+S3,meta,,ext_affiliate_name,,
+S3,meta,,study_kind,IDE,
+S3,meta,,n_subjects,88,
+S3,meta,,data_from,2020-01-01,
+S3,meta,,data_to,2024-06-30,
+S3,meta,,median_fu_months,24,
+S3,meta,,ds_status,locked,
+S3,meta,,transfer_mode,periodic,
+S3,country,,,NL,
+S3,country,,,ES,
+S3,provision,,,TAB+SIG,
+S3,arm,,,IDE-Device,treatment
+S3,arm,,,Standard Care,control
+S3,arm,,,Sham-Kontrolle,sham
+S3,enrollment,P-010,,IDE-Device,2021-02-23
+S3,enrollment,P-011,,Standard Care,2020-02-21
+S3,enrollment,P-012,,IDE-Device,2020-08-06
+S3,enrollment,P-013,,Sham-Kontrolle,2020-09-22
+S4,meta,,study_name,RPM-REG,
+S4,meta,,nct,,
+S4,meta,,contributor,Rigshospitalet,
+S4,meta,,ext_affiliate,0,
+S4,meta,,ext_affiliate_name,,
+S4,meta,,study_kind,REGISTRY-RPM,
+S4,meta,,n_subjects,1740,
+S4,meta,,data_from,2019-01-01,
+S4,meta,,data_to,,
+S4,meta,,median_fu_months,30,
+S4,meta,,ds_status,rolling,
+S4,meta,,transfer_mode,periodic,
+S4,country,,,DK,
+S4,provision,,,TAB,
+S4,arm,,,Registry,no intervention
+S4,enrollment,P-014,,Registry,2019-05-23
+S4,enrollment,P-015,,Registry,2021-01-09
+S4,enrollment,P-016,,Registry,2019-11-26
+S4,enrollment,P-017,,Registry,2019-04-30
+S4,enrollment,P-018,,Registry,2019-03-22
+S4,enrollment,P-025,,Registry,2019-05-20
+S5,meta,,study_name,CLAIMS-FR,
+S5,meta,,nct,,
+S5,meta,,contributor,CNAM,
+S5,meta,,ext_affiliate,1,
+S5,meta,,ext_affiliate_name,Assurance Maladie regional funds,
+S5,meta,,study_kind,CLAIMS,
+S5,meta,,n_subjects,96000,
+S5,meta,,data_from,2018-01-01,
+S5,meta,,data_to,2022-12-31,
+S5,meta,,median_fu_months,48,
+S5,meta,,ds_status,locked,
+S5,meta,,transfer_mode,single,
+S5,country,,,FR,
+S5,provision,,,TAB,
+S5,arm,,,Kohorte GKV,no intervention
+S5,enrollment,P-019,,Kohorte GKV,2020-07-27
+S5,enrollment,P-020,,Kohorte GKV,2021-02-09
+S5,enrollment,P-021,,Kohorte GKV,2018-04-15
+S5,enrollment,P-022,,Kohorte GKV,2021-04-07
+S6,meta,,study_name,META-ONLY,
+S6,meta,,nct,,
+S6,meta,,contributor,Karolinska,
+S6,meta,,ext_affiliate,0,
+S6,meta,,ext_affiliate_name,,
+S6,meta,,study_kind,OTHER,
+S6,meta,,n_subjects,0,
+S6,meta,,data_from,2022-01-01,
+S6,meta,,data_to,,
+S6,meta,,median_fu_months,,
+S6,meta,,ds_status,rolling,
+S6,meta,,transfer_mode,single,
+S6,country,,,SE,
+S6,provision,,,META,

@@ -2,6 +2,26 @@
 <img src="images/af-b-step_logo.svg" alt="drawing" width="300"/> 
 
 ---
+Table of content
+
+- [AFBSTEP-OMOP](#afbstep-omop)
+  - [Installation](#installation)
+  - [Forewords](#forewords)
+    - [What is AFBSTEP](#what-is-afbstep)
+    - [What is OMOP](#what-is-omop)
+      - [Why is it good for ?](#why-is-it-good-for-)
+      - [Terminology](#terminology)
+  - [What is AFBSTEP-OMOP ?](#what-is-afbstep-omop-)
+    - [What is different from stock OMOP](#what-is-different-from-stock-omop)
+  - [Mapping your tabular standard data to the AFBSTEP-OMOP model](#mapping-your-tabular-standard-data-to-the-afbstep-omop-model)
+  - [Validating your mapped dataset](#validating-your-mapped-dataset)
+    - [Against the pinned vocabulary and specifications](#against-the-pinned-vocabulary-and-specifications)
+    - [Against the full OHDSI vocabulary](#against-the-full-ohdsi-vocabulary)
+    - [Reading the report](#reading-the-report)
+- [Contact](#contact)
+
+
+---
 
 
 # AFBSTEP-OMOP
@@ -9,6 +29,21 @@
 This package defines how OMOP is used to integrate clinical study data within the AF-B-STEP consortium. It contains the specifications of the database schema, descriptions, examples and a validation pipeline. AF-B-STEP has introduced minor extensions to OMOP as **AFBSTEP-OMOP** which include custom concepts, additional tables, and best practices, but has not modified the original structure.
 
 This package helps to understand the requirements when transforming clinical study data to AF-B-STEP OMOP and how to verify that what has been produced is compliant with the AFBSTEP-OMOP specifications.
+
+Transforming/mapping your data to the AFBSTEP-OMOP model essentially boilds down to two things:
+- mapping the "structure" of your data (moving the source variable to their appropriate target tables)
+- mapping the values of your data to appropriate "concept" (mostly codes)
+
+The AFBSTEP-OMOP package provides:
+- a description of the target database schema
+- a registry of the concepts AFBSTEP expects, both standard and custom
+- a guidleine and examples
+- a validation function
+- a mock data generator
+- a browsable explorer of the specification
+
+More information below in the following sections. 
+
 
 ## Installation
 
@@ -23,12 +58,13 @@ Then install the dependancies in a virtual environment:
 uv sync
 ```
 
-The default installation has no dependencies (only python's stdlib). To run the notebook example (see below), you will need to also install some addiation dependencies:
+The default installation has no dependencies (only python's stdlib). To run the notebook example (see [mapping section](#mapping-your-tabular-standard-data-to-the-afbstep-omop-model)), you will need to also install some additional dependencies:
 ```
-uv sync --group example_pipeline
+uv sync --extra example_pipeline
 ```
 
 ## Forewords
+
 
 ### What is AFBSTEP
 
@@ -36,15 +72,20 @@ AF-B-STEP is an international research consortium which brings together academic
 
 Official website: https://afbstep.eu/
 
+
 ### What is OMOP
 
 The Observational Medical Outcomes Partnership (OMOP) Common Data Model (CDM) is an open community data standard, designed to standardize the structure and content of observational data and to enable efficient analyses that can produce reliable evidence.
 
 It provides a structured relational database schema (a collection of tables with pre-specified columns and constraints) onto which (almost) any kind of clinical data set can be mapped. In addition, it provides a standard vocabulary registry (Athena) that gives (almost) every clinical meaning a standardised concept.
 
-Official website: https://www.ohdsi.org/data-standardization/ \
-Common data model: https://ohdsi.github.io/CommonDataModel/ \
-Standardized vocabulary: https://athena.ohdsi.org/vocabulary/list
+Web links:
+- [Official website](https://www.ohdsi.org/data-standardization/) 
+- [Common data model](https://ohdsi.github.io/CommonDataModel/) 
+- [Standardized vocabulary](https://athena.ohdsi.org/vocabulary/list) 
+- [View of all available OMOP tables](https://ohdsi.github.io/CommonDataModel/cdm54erd.html) 
+- [Description of the tables](https://www.ohdsi.org/web/wiki/doku.php?id=documentation:cdm:standardized_clinical_data_tables) (for example, the [person table](https://www.ohdsi.org/web/wiki/doku.php?id=documentation:cdm:person))
+
 
 #### Why is it good for ?
 
@@ -107,12 +148,13 @@ Two things worth noticing:
 1. The same clinical fact now carries the same `concept_id` at both sites. An analysis written once runs against both, which is the entire point of a common model.
 2. The site's own value survives in `*_source_value`. Site A's `sbp` and Site B's `systolic_mmhg` both land in `measurement_concept_id = 3004249`, but each row still records what it came from, so a mapping decision can be audited, questioned, or corrected later without going back to the source system.
 
-> Note also that Site B's `afib_yn = N` for patient 1002 produces no row at all, not a row saying "no". **Absence is meaningful in OMOP and is modelled deliberately, see Step 1.**
+> Note also that Site B's `afib_yn = N` for patient 1002 produces no row at all, not a row saying "no". **Absence is meaningful in OMOP and is modelled deliberately** (see `mapping_guideline/mapping_codebook.md`, section "Mapping Missingness")
 
 
 #### Terminology
 
 OMOP has precise names for things that are easy to blur together, and the rest of this document uses them strictly.
+The most important terms are described below, for a more complete description click [here](https://www.ohdsi.org/web/wiki/doku.php?id=documentation:cdm:standardized_vocabularies).
 
 | Term | Means | Example |
 |---|---|---|
@@ -144,16 +186,28 @@ One further distinction, because both are called "concept" and they do opposite 
 
 `3004249` ([systolic blood pressure](https://athena.ohdsi.org/search-terms/terms?query=3004249)) is a question; `4154290` ([paroxysmal atrial fibrillation](https://athena.ohdsi.org/search-terms/terms?query=4154290&boosts&page=1)) is an answer.
 
+
 ## What is AFBSTEP-OMOP ?
 
 AFBSTEP-OMOP relies on the OMOP model but extends its model and registry with additional tables and concepts relevant to the storage of cardiac monitoring data. It also restricts and frames the OMOP model to fit the need of the AFBSTEP project.
 
 It defines:
 - a minimal set of CDM tables to be transfered with AF-B-STEP data sets
-- a minimal set of CDM fields, and the concepts they must carry
+- a minimal set of CDM fields (columns), and the concepts they must carry
 - pinned OHDSI concepts for standard clinical meanings
 - custom concepts for meanings the OHDSI registry does not cover
 - best practices on how to store AF burden / cardiac monitoring data within the OMOP CDM
+
+All of the above can be browsed in the **specification explorer**: a network of the
+in-scope tables where clicking one shows its required fields and the minimal-data-set
+items it carries.
+
+<!-- TODO: replace with the GitHub Pages URL once Pages is enabled for the public repo -->
+Open it at: *(link to be added)*
+
+The page is one self-contained html file with no external resources, so it also works offline
+from a local copy. You can open  it with your internet browser.  
+
 
 ### What is different from stock OMOP
 
@@ -170,31 +224,26 @@ AFBSTEP-OMOP is a **profile** of OMOP CDM, not a fork. Nothing in the stock sche
 | Field requirements | the DDL's `NOT NULL` constraints | additionally a **minimal data set** of fields that must be populated even where the DDL allows `NULL` — stricter than the CDM, never looser |
 | Cardiac monitoring data | no prescribed pattern | an **episode-anchored model** for detected rhythm episodes and aggregated burden windows (see "Storing cardiac monitoring data" section in `mapping_guideline/mapping_codebook.md`) |
 
-The four companion tables exist because AFBOLD is a meta-analysis of monitoring data: cross-study pooling needs study provenance, an AF-burden value is only interpretable together with the device and algorithm that produced it, and the underlying recordings must remain findable for re-analysis.
+The five companion tables exist because AFBOLD is a meta-analysis of monitoring data: cross-study pooling needs study provenance, an AF-burden value is only interpretable together with the device and algorithm that produced it, and the underlying recordings must remain findable for re-analysis.
 
 | Table | One row per | Purpose |
-|---|---|---|
-| `study` | contributing study | Describes a source study: name, NCT number, sponsor, phase, start and end dates. |
-| `person_study` | person per study | Links a person to the study they were enrolled in, including the enrolment date. |
-| `study_attribute` | selected value, per study | Study-level attributes that allow more than one answer per study — e.g. country of data collection, data provision level. |
-| `device_specs` | episode | The device behind a monitoring episode: device concept, manufacturer/model, serial number, and the rhythm-detection **algorithm with its version**. |
-| `source` | external file reference | Points a row — typically an episode — to an externally stored raw file (CIED remote-monitoring report, Holter/ECG waveform, scanned document or letter) without storing binary content inside the CDM. |
+|---|---|
+| `source` | external file reference | Links a person's episode, measurement, observation, or drug exposure to an externally stored raw file (PDF, waveform, audio) via a UUID, without storing binary content in the CDM itself |
+| `device_specs` | episode | Records per-episode device attributes the official `device_exposure` table has no field for (detection algorithm, algorithm version, serial number, hardware version) |
+| `person_study` | person per study | Links a person to the study they were enrolled in, including their study arm assignment |
+| `study` | contributing study | Describes a source study contributing data (present only when a partner submits data in a study context) |
+| `study_attribute` | study | Study-level attributes that allow more than one answer per study (e.g. country of data collection, data provision level) |
 
 The companion tables are strictly additive: they reference the standard tables (`person_id`, `episode_id`), no standard table references them, and a stock-OMOP consumer can ignore them entirely.
 
 ## Mapping your tabular standard data to the AFBSTEP-OMOP model 
 
 Mapping the source data is, in general, not an easy task, and there is no universal way to automate the process.
-The AFBSTEP-OMOP package provides:
-- a description of the target database schema
-- a registry of the concepts AFBSTEP expects, both standard and custom
-- a guidleine and examples
-- a validation function
-- a mock data generator
 
 Extended documentation, helpers and examples are provided in the `mapping_guideline/` directory.
-- A full example is given in the `guideline/example` directory, which contains an initial data set, a notebook with the 6 steps described below and a final, mapped and validated AFBSTEP-OMOP conform data set.
+- A full example is given in the `mapping_guideline/example` directory, which contains an initial data set, a notebook with the 6 steps described below and a final, mapped and validated AFBSTEP-OMOP conform data set.
 - A `mapping_cookbook.md` file that describes the mapping pipeline for several typical clinical source data set (baseline table, cardiac monitoring, followup table, etc.)
+- A `afbstepomop-schema_description.md` file containing extended description of the data base schema
 
 In general, the transformation/mapping process from your source data set to a AFBSTEP-OMOP conform data set can be seprated into 6 steps
 
@@ -238,10 +287,29 @@ from afbstepomop.source_validator import describe, load_vocabulary
 
 print(describe(load_vocabulary(), "<table>"))
 ```
-This lists, per concept field, the concepts the specification permits there.
+This lists, per concept field, the concepts the specification offers there.
 
 If the concept you need is not listed in the registry, search the Athena catalogue: https://athena.ohdsi.org/vocabulary/list
 Do not mint your own custom concept. The `2000000000+` range is managed by AFBSTEP; request an addition instead.
+
+> Note that the command above need no dependencies, but nothing stops you loading the
+> specification into (pandas) dataframes. The files ship inside the package:
+>```python
+>import pandas as pd
+>from afbstepomop.source_validator import DEFAULT_SOURCE_DIR
+>
+>pd.read_csv(DEFAULT_SOURCE_DIR / "spec" / "custom_vocabulary.csv")
+>```
+>
+>**One trap.** A concept-id column that contains blanks is read as `float`, so
+>`2000000002` becomes `2000000002.0`, and any id written back out is then wrong.
+>It affects `valid_for_question` and `valid_for_episode_type`. Cast them:
+>
+>```python
+>df = df.astype({"valid_for_question": "Int64", "valid_for_episode_type": "Int64"})
+>```
+>The same applies to your own mapped tables: cast every `*_id` column to `Int64`
+>before writing a CSV, or the foreign keys in your export will not resolve.
 
 Several approaches can be used to help the manual search or "semi" automate the process (some are listed [here](https://www.ohdsi.org/software-tools/)):
 - use the [OMOPHub](https://github.com/OMOPHub)'s API endpoint
@@ -249,9 +317,122 @@ Several approaches can be used to help the manual search or "semi" automate the 
 - use RAG or LLM-based methods such as provide by [Lettuce](https://github.com/Health-Informatics-UoN/lettuce)
 
 Once you have mapped your data, the resulting tables must be validated. Export all the resulting tables as `csv` files into a export directory (example `export/`) and run the following command
+```bash
+uv run python main.py --validate ./export
+```
 
-These steps are sketched schematically below: \
-<img src="images/omop_mapping_workflow.png" alt="drawing" width="500"/>
+There is also code concept validation tool, see [Validating your mapped dataset](#validating-your-mapped-dataset) for the fuller check and for how to read the report.
+
+## Validating your mapped dataset
+
+Validation always runs **offline**. Nothing is uploaded and no service is called, so it
+works inside a restricted hospital network.
+
+### Against the pinned vocabulary and specifications
+
+```bash
+uv run python main.py --validate ./export
+```
+
+Checks the structure of your export:
+- that foreign keys resolve
+- that values fall inside the ranges the specification states
+- that every required concept is present. 
+
+Concepts are resolved against the registry pinned in this package.
+
+### Against the full OHDSI vocabulary
+
+Recommended before you submit. It additionally confirms that **every** concept id you used
+really exists, that it sits in the domain the field expects, and that it has not been
+retired or replaced upstream.
+
+This needs a local copy of the OHDSI vocabulary, built once into an index.
+
+**1. Download the vocabulary from Athena**
+
+- Go to <https://athena.ohdsi.org> and create an account.
+- Open the **Download** tab and select the vocabularies you need. SNOMED, LOINC, RxNorm,
+  RxNorm Extension, ATC, UCUM, CDISC and the OMOP-generated vocabularies cover the
+  concepts AFBSTEP pins.
+- Submit the request. You will receive an email with a download link when the bundle is
+  ready. Download and unzip it.
+
+**2. Build the index, once**
+
+```bash
+uv run python main.py --build-index /path/to/athena_download
+```
+
+This reads `CONCEPT.csv` once and writes `vocabulary.sqlite` into the working directory.
+It takes a few minutes and the result is large: the release this was last tested against
+held 10.1 million concepts and produced a 1.2 GB index. Rebuild it only when you move to a
+newer vocabulary release.
+
+**3. Validate**
+
+```bash
+uv run python main.py --validate-full ./export
+```
+
+Add `--index-path /path/to/vocabulary.sqlite` if the index is not in the working directory.
+
+### Reading the report
+
+The report opens with a verdict, and names the vocabulary that produced it:
+
+```
+AFBSTEP validation: PASSED - 0 error(s), 22 warning(s) [concepts checked against: OHDSI vocabulary v5.0 29-AUG-26 (10,167,185 concepts) + AFBSTEP custom concepts (117 concepts)]
+```
+
+Passing against the pinned registry is a weaker claim than passing against a full release,
+so the two are never reported as the same thing.
+
+**Severity.** An `error` means a stated requirement is unmet and the dataset does not pass.
+A `warning` never fails a dataset: it marks something the specification permits but that a
+human should look at. The registry of concepts is a default offered to you, not a closed
+list: using a concept it does not pin is a warning, never an error.
+
+Findings are grouped into five layers:
+
+| layer | question it answers |
+|---|---|
+| `conformance` | are the right files and columns there, with required fields populated? |
+| `referential` | do foreign keys point at rows that exist? |
+| `terminology` | are the concept ids real, current, and in the domain the field expects? |
+| `plausibility` | are numeric values and their units inside the stated range? |
+| `minimal data set` | is every concept AFBSTEP requires present somewhere? |
+
+What each message means:
+
+| layer | message | severity |
+|---|---|---|
+| conformance | `no <table>.csv found, but the table is mandatory` | error |
+| conformance | `no <table>.csv found, but the table is expected/optional` | warning |
+| conformance | `column is missing but the CDM declares it NOT NULL` | error |
+| conformance | `the CDM declares this field NOT NULL, but it is empty` | error |
+| conformance | `column is not part of the CDM table and will not load` | warning |
+| conformance | `table is present but empty` | warning |
+| referential | `N value(s) do not exist in <table>.<column>` | error |
+| terminology | `concept N does not exist` | error |
+| terminology | `value is not a concept id` | error |
+| terminology | `concept N is in domain 'X', but this field expects 'Y'` | error |
+| terminology | `concept N was retired upstream` | warning |
+| terminology | `concept N is not a standard concept` | warning |
+| terminology | `concept id 0: source value did not map` | warning |
+| terminology | `N concept(s) not in <registry>; existence and domain were not verified` | warning |
+| plausibility | `concept N: value is not a number` | error |
+| plausibility | `concept N: value outside the expected range` | error |
+| plausibility | `concept N: unit is not the expected <unit>` | error |
+| plausibility | `cannot apply the range for concept N: <table> has no <column> to select rows by` | warning |
+| minimal data set | `<item> (concept N) appears nowhere in the dataset` | error |
+| minimal data set | the same, for a presence-only field | warning |
+
+The last row is the presence-only case. In `condition_occurrence`, `procedure_occurrence`,
+`drug_exposure` and `device_exposure`, naming a concept *is* the assertion that it applies,
+so an absent row cannot be told apart from a fact that was never assessed. Such an absence
+is reported as a warning. To state a negative explicitly, record it as described in
+`mapping_guideline/mapping_codebook.md`.
 
 
 # Contact
