@@ -387,10 +387,16 @@ AFBSTEP validation: PASSED - 0 error(s), 22 warning(s) [concepts checked against
 Passing against the pinned registry is a weaker claim than passing against a full release,
 so the two are never reported as the same thing.
 
-**Severity.** An `error` means a stated requirement is unmet and the dataset does not pass.
-A `warning` never fails a dataset: it marks something the specification permits but that a
-human should look at. The registry of concepts is a default offered to you, not a closed
-list: using a concept it does not pin is a warning, never an error.
+**Severity.** Findings come in three levels, reported in their own sections.
+
+- **`error`** — a stated requirement is unmet and the dataset does not pass.
+- **`warning`** — permitted, but worth checking, and something you can usually act on.
+  Never fails a dataset.
+- **`info`** — a consequence of a choice the specification already made, recorded so you
+  can weigh it. Nothing to fix.
+
+The registry of concepts is a default offered to you, not a closed list: using a concept
+it does not pin is never an error.
 
 Findings are grouped into five layers:
 
@@ -417,7 +423,7 @@ What each message means:
 | terminology | `value is not a concept id` | error |
 | terminology | `concept N is in domain 'X', but this field expects 'Y'` | error |
 | terminology | `concept N was retired upstream` | warning |
-| terminology | `concept N is not a standard concept` | warning |
+| terminology | `concept N is not a standard concept` | info |
 | terminology | `concept id 0: source value did not map` | warning |
 | terminology | `N concept(s) not in <registry>; existence and domain were not verified` | warning |
 | plausibility | `concept N: value is not a number` | error |

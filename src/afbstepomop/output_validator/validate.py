@@ -49,6 +49,7 @@ from afbstepomop.source_validator.vocabulary import Vocabulary
 
 ERROR = "error"
 WARNING = "warning"
+INFO = "info"
 
 CONFORMANCE = "conformance"
 REFERENTIAL = "referential"
@@ -58,6 +59,13 @@ MINIMAL = "minimal data set"
 
 UNMAPPED_CONCEPT_ID = 0
 UNIT_COLUMN = "unit_concept_id"
+VALUE_CONCEPT_COLUMN = "value_as_concept_id"
+
+#: Concepts that say a row records an *absent* or *unobtainable* finding rather
+#: than a positive one — the missingness cases in
+#: ``mapping_guideline/mapping_codebook.md``. 
+# A row carrying one of these is exempt from the domain check: see ``_concept_findings``.
+MISSINGNESS_MARKERS = frozenset({4189457, 45884199, 45880382, 2000013000})
 SOURCE_CONCEPT_SUFFIX = "_source_concept_id"
 MANDATORY_TIER = "mandatory"
 OPTIONAL_TIER = "optional"
@@ -169,19 +177,28 @@ class Report:
         """
         errors = self.of_severity(ERROR)
         warnings = self.of_severity(WARNING)
+        notes = self.of_severity(INFO)
 
         verdict = "PASSED" if self.passed else "FAILED"
         mode = f" [concepts checked against: {self.vocabulary_label}]" if self.vocabulary_label else ""
 
         lines = [
             f"AFBSTEP validation: {verdict}"
-            f" — {len(errors)} error(s), {len(warnings)} warning(s){mode}",
+            f" — {len(errors)} error(s), {len(warnings)} warning(s), {len(notes)} info{mode}",
             "",
             "Tables read:",
         ]
         lines += [f"  {name}: {count} rows" for name, count in sorted(self.row_counts.items())]
-        if self.findings:
-            lines += ["", "Findings:"] + [f"  {finding}" for finding in self.findings]
+
+        # Grouped by severity rather than by order of detection. 
+        # Detection order is kept  inside each group.
+        for heading, group in (
+            ("Errors — the dataset does not meet a stated requirement:", errors),
+            ("Warnings — permitted, but worth checking:", warnings),
+            ("Info — consequences of choices the specification already made:", notes),
+        ):
+            if group:
+                lines += ["", heading] + [f"  {finding}" for finding in group]
         if self.unchecked:
             lines += ["", "Not checked by this run:"] + [f"  - {item}" for item in self.unchecked]
         return "\n".join(lines)
@@ -319,6 +336,7 @@ def _concept_findings(
     usage: dict[int, int],
     source: VocabularySource,
     expectations: DomainExpectations,
+    absent_rows: dict[int, int] | None = None,
 ) -> list[Finding]:
     """Judge every concept used in one field against the vocabulary source.
 
@@ -339,6 +357,15 @@ def _concept_findings(
         Concept ids used in it, and how many rows used each.
     source : VocabularySource
         The vocabulary to resolve against.
+    absent_rows : dict of int to int, optional
+        Per concept, how many of its rows record an *absent* finding rather
+        than a positive one. Ruling a diagnosis out puts the *condition*'s
+        concept in an observation row, which the codebook prescribes and OMOP's
+        domain rules would otherwise reject — one error per explicit negative,
+        in every partner dataset. Those rows are therefore excluded from the
+        domain check, and a concept whose rows are all absent is not judged on
+        domain at all. Only the domain check is affected: whether a concept
+        exists, is standard or is current is true of it either way.
 
     Returns
     -------
@@ -378,17 +405,19 @@ def _concept_findings(
             # consequence is real but is the reader's to weigh, not a failure,
             # so it is reported rather than rejected.
             findings.append(
-                Finding(TERMINOLOGY, WARNING, table, column,
+                Finding(TERMINOLOGY, INFO, table, column,
                         f"concept {concept_id} ({record.concept_name}) is not a standard concept; "
                         "analyses that select only standard concepts will not see these rows", count=rows)
             )
         elif expected is not None and not any(record.in_domain(d) for d in expected):
-            wanted = " or ".join(repr(d) for d in sorted(expected))
-            findings.append(
-                Finding(TERMINOLOGY, ERROR, table, column,
-                        f"concept {concept_id} ({record.concept_name}) is in domain "
-                        f"{record.domain_id!r}, but this field expects {wanted}", count=rows)
-            )
+            positive = rows - (absent_rows or {}).get(concept_id, 0)
+            if positive:
+                wanted = " or ".join(repr(d) for d in sorted(expected))
+                findings.append(
+                    Finding(TERMINOLOGY, ERROR, table, column,
+                            f"concept {concept_id} ({record.concept_name}) is in domain "
+                            f"{record.domain_id!r}, but this field expects {wanted}", count=positive)
+                )
 
     if unresolved:
         findings.append(
@@ -423,6 +452,11 @@ def _terminology_findings(
         for column in schema.tables[table].concept_columns():
             malformed, unmapped = 0, 0
             usage: dict[int, int] = {}
+            # Rows where this concept states an absent finding rather than a
+            # positive one. Counted per concept so that a concept used both
+            # ways is still judged on its positive rows.
+            absent: dict[int, int] = {}
+            judging_the_marker = column == VALUE_CONCEPT_COLUMN
 
             for row in rows:
                 value = (row.get(column) or "").strip()
@@ -435,8 +469,15 @@ def _terminology_findings(
                     continue
                 if concept_id == UNMAPPED_CONCEPT_ID:
                     unmapped += 1
-                else:
-                    usage[concept_id] = usage.get(concept_id, 0) + 1
+                    continue
+
+                usage[concept_id] = usage.get(concept_id, 0) + 1
+                if judging_the_marker:
+                    continue
+                marker = (row.get(VALUE_CONCEPT_COLUMN) or "").strip()
+                if marker.isdigit() and int(marker) in MISSINGNESS_MARKERS:
+                    absent[concept_id] = absent.get(concept_id, 0) + 1
+
 
             if malformed:
                 findings.append(
@@ -446,7 +487,7 @@ def _terminology_findings(
                 findings.append(
                     Finding(TERMINOLOGY, WARNING, table, column, "concept id 0: source value did not map", count=unmapped)
                 )
-            findings.extend(_concept_findings(table, column, usage, source, expectations))
+            findings.extend(_concept_findings(table, column, usage, source, expectations, absent))
 
     return findings
 
