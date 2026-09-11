@@ -226,7 +226,7 @@ AFBSTEP-OMOP is a **profile** of OMOP CDM, not a fork. Nothing in the stock sche
 The five companion tables exist because AFBOLD is a meta-analysis of monitoring data: cross-study pooling needs study provenance, an AF-burden value is only interpretable together with the device and algorithm that produced it, and the underlying recordings must remain findable for re-analysis.
 
 | Table | One row per | Purpose |
-|---|---|
+|---|---|---|
 | `source` | external file reference | Links a person's episode, measurement, observation, or drug exposure to an externally stored raw file (PDF, waveform, audio) via a UUID, without storing binary content in the CDM itself |
 | `device_specs` | episode | Records per-episode device attributes the official `device_exposure` table has no field for (detection algorithm, algorithm version, serial number, hardware version) |
 | `person_study` | person per study | Links a person to the study they were enrolled in, including their study arm assignment |
