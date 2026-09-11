@@ -40,7 +40,7 @@ The AFBSTEP-OMOP package provides:
 - a guidleine and examples
 - a validation function
 - a mock data generator
-- a browsable explorer of the specification
+- a [browsable explorer of the specification](https://afbstep.github.io/afbstep-omop/)
 
 More information below in the following sections. 
 
@@ -202,8 +202,7 @@ All of the above can be browsed in the **specification explorer**: a network of 
 in-scope tables where clicking one shows its required fields and the minimal-data-set
 items it carries.
 
-<!-- TODO: replace with the GitHub Pages URL once Pages is enabled for the public repo -->
-Open it at: *(link to be added)*
+Open it at: <https://afbstep.github.io/afbstep-omop/>
 
 The page is one self-contained html file with no external resources, so it also works offline
 from a local copy. You can open  it with your internet browser.  
