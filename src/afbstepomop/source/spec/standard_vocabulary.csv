@@ -74,7 +74,6 @@ concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concep
 4089036,Telephone encounter,Procedure,SNOMED,Procedure,S,185317003,2002-01-31,2099-12-31,observation,value_as_concept_id,
 4336464,Coronary artery bypass graft,Procedure,SNOMED,Procedure,S,232717009,2002-01-31,2099-12-31,procedure_occurrence,procedure_concept_id,
 4142947,Symptomatic,Meas Value,SNOMED,Qualifier Value,S,264931009,2002-01-31,2099-12-31,observation,value_as_concept_id,2000009005
-3521836,Death administration,Type Concept,SNOMED,Admin Concept,,291000000109,2004-01-31,2010-10-01,death,death_type_concept_id,
 4195981,Medical records review,Observation,SNOMED,Procedure,S,312853008,2002-01-31,2099-12-31,observation,observation_concept_id,
 44792034,Consent withdrawn to share patient data with specified third party,Observation,SNOMED,Clinical Finding,S,320041000000109,2008-04-01,2099-12-31,observation,value_as_concept_id,
 443392,Malignant neoplastic disease,Condition,SNOMED,Disorder,S,363346000,2002-01-31,2099-12-31,condition_occurrence,condition_concept_id,
@@ -112,14 +111,14 @@ concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concep
 9618,ohm,Unit,UCUM,Unit,S,Ohm,1970-01-01,2099-12-31,measurement,unit_concept_id,
 21491502,R-R interval.standard deviation (Heart rate variability),Measurement,LOINC,Clinical Observation,S,80404-7,2016-06-24,2099-12-31,measurement,measurement_concept_id,
 44783192,Alert received from telehealth monitoring system,Observation,SNOMED,Context-dependent,S,699249000,2014-01-31,2099-12-31,observation,value_as_concept_id,
-4189457,Clinical finding absent,Observation,SNOMED,Context-dependent,S,373572006,2002-07-31,2099-12-31,observation,value_as_concept_id
-45884199,Test not performed,Meas Value,LOINC,Answer,S,LA13546-9,1970-01-01,2099-12-31,measurement,value_as_concept_id
-45880382,Unable to determine,Meas Value,LOINC,Answer,S,LA11137-9,1970-01-01,2099-12-31,measurement,value_as_concept_id
+4189457,Clinical finding absent,Observation,SNOMED,Context-dependent,S,373572006,2002-07-31,2099-12-31,observation,value_as_concept_id,
+45884199,Test not performed,Meas Value,LOINC,Answer,S,LA13546-9,1970-01-01,2099-12-31,measurement,value_as_concept_id,
+45880382,Unable to determine,Meas Value,LOINC,Answer,S,LA11137-9,1970-01-01,2099-12-31,measurement,value_as_concept_id,
 45877096,Sinus rhythm,Meas Value,LOINC,Answer,S,LA17718-0,1970-01-01,2099-12-31,measurement,value_as_concept_id,3022318
 45877359,Paced rhythm,Meas Value,LOINC,Answer,S,LA17093-8,1970-01-01,2099-12-31,measurement,value_as_concept_id,3022318
-3006307,R-R interval (Mean value during study),Measurement,LOINC,Clinical Observation,S,18505-8,1998-08-25,2099-12-31,measurement,measurement_concept_id
-46235177,R-R interval (Maximum value during study),Measurement,LOINC,Clinical Observation,S,76638-6,2015-03-11,2099-12-31,measurement,measurement_concept_id
-46235178,R-R interval (Minimum value during study),Measurement,LOINC,Clinical Observation,S,76639-4,2015-03-11,2099-12-31,measurement,measurement_concept_id
+3006307,R-R interval (Mean value during study),Measurement,LOINC,Clinical Observation,S,18505-8,1998-08-25,2099-12-31,measurement,measurement_concept_id,
+46235177,R-R interval (Maximum value during study),Measurement,LOINC,Clinical Observation,S,76638-6,2015-03-11,2099-12-31,measurement,measurement_concept_id,
+46235178,R-R interval (Minimum value during study),Measurement,LOINC,Clinical Observation,S,76639-4,2015-03-11,2099-12-31,measurement,measurement_concept_id,
 9593,millisecond,Unit,UCUM,Unit,S,ms,1970-01-01,2099-12-31,measurement,unit_concept_id,
 1123627,Sodium-glucose co-transporter 2 (SGLT2) inhibitors,Drug,ATC,ATC 4th,S,A10BK,1970-01-01,2099-12-31,drug_exposure,drug_concept_id,
 1588648,valsartan and sacubitril,Drug,ATC,ATC 5th,C,C09DX04,1970-01-01,2099-12-31,drug_exposure,drug_concept_id,
@@ -151,3 +150,6 @@ concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concep
 37530454,Placebo Comparator Arm,Observation,CDISC,Observable Entity,,C174268,2023-12-01,2099-12-31,person_study,arm_type_concept_id,
 37543327,Sham Comparator Arm,Observation,CDISC,Observable Entity,,C174269,2023-12-01,2099-12-31,person_study,arm_type_concept_id,
 37529223,No Intervention Arm,Observation,CDISC,Observable Entity,,C174270,2023-12-01,2099-12-31,person_study,arm_type_concept_id,
+32880,Standard algorithm,Type Concept,Type Concept,Type Concept,S,OMOP4976953,2020-08-20,2099-12-31,measurement,measurement_type_concept_id,
+8550,minute,Unit,UCUM,Unit,S,min,1970-01-01,2099-12-31,,,
+1147869,visit_occurrence.visit_occurrence_id,Metadata,CDM,Field,S,CDM916,2018-10-11,2099-12-31,observation,obs_event_field_concept_id,

@@ -277,13 +277,17 @@ differently.
 The diagnosis is made, or confirmed, as part of the baseline
 assessment itself.
 
+The baseline visit is the `visit_occurrence` row marked by an
+`observation` row carrying concept `2000013017` ("Baseline visit"; see
+"Marking the baseline visit" below)
+
 **Pattern:** one `condition_occurrence` row.
+
 ```
-condition_concept_id          = <the diagnosis>
-condition_start_date          = <the baseline visit date>
-condition_type_concept_id     = <provenance, constant per data provider>
-condition_status_concept_id   = 32893 ("Confirmed diagnosis")
-visit_occurrence_id           = <the baseline visit>
+condition_concept_id        = <the diagnosis>
+condition_start_date        = <the date of the visit marked 2000013017, or the enrolment date if none>
+condition_type_concept_id   = <provenance, constant per data provider>
+visit_occurrence_id         = <the visit marked 2000013017, else empty>
 ```
 
 #### Case 2 — Historical, true date known
@@ -298,7 +302,6 @@ not at the baseline visit.
 condition_concept_id          = <the diagnosis>
 condition_start_date          = <the actual historical diagnosis date>
 condition_type_concept_id     = <provenance, constant per data provider>
-condition_status_concept_id   = NULL
 visit_occurrence_id           = NULL
 ```
 
@@ -318,7 +321,6 @@ date `1900-01-01` in place of the unknown true diagnosis date.
 condition_concept_id            = <the diagnosis>
 condition_start_date            = 1900-01-01
 condition_type_concept_id       = <provenance, constant per data provider>
-condition_status_concept_id     = NULL
 visit_occurrence_id             = NULL
 ```
 
@@ -344,6 +346,38 @@ appropriate concepts can be carried out at athena.ohdsi.org. It is
 important to ensure that these are `type_concept_ids`. Assigning your
 own concept codes is prohibited.
 
+### Marking the baseline visit
+
+Some protocols distinguish a baseline visit — the visit at which
+enrolment assessments (comorbidities, vitals, labs) are performed —
+from all later visits. OMOP's `visit_occurrence` table has no field for
+this role; AFBSTEP marks it explicitly with a custom concept so that
+downstream analysis can identify the baseline visit without guessing
+from dates.
+
+**Pattern:** one `observation` row per person, at most.
+
+```
+observation_concept_id      = 2000013017 ("Baseline visit")
+observation_date            = <the visit's start date>
+observation_type_concept_id = <provenance, constant per data provider>
+observation_event_id        = <the baseline visit_occurrence_id>
+obs_event_field_concept_id  = 1147869 ("visit_occurrence.visit_occurrence_id")
+```
+
+**When to use it.** Where the source protocol has a distinct baseline
+visit, mark that one `visit_occurrence` row this way. This is independent 
+of whether the visit date coincides with `person_study.enrollment_date` /
+`observation_period_start_date`.
+
+**When to omit it.** A partner whose protocol has no distinct baseline
+visit, enrolment happens without a dedicated visit, or the source data
+does not distinguish between baseline and enrolment date, omits this entry.
+**Comorbidity Case 1** then falls back to the enrolment date.
+
+**Constraints.** If a person has more than one candidate visit, 
+the data provider decides which one is the baseline visit. 
+
 ### Example
 
 **Source information**
@@ -355,13 +389,13 @@ instance of each case.
 |---|---|---|
 | P-001 | Heart failure newly confirmed at the baseline visit (2024-02-01) | 1 |
 | P-002 | Heart failure since a documented hospitalisation on 2019-11-03 | 2 |
-| P-003 | Heart failure noted in the patient's history at baseline (2024-02-05); no date of onset available | 3 |
+| P-003 | Heart failure noted in the patient's history at enrolment (2024-02-05); no date of onset available | 3 |
 
 #### Mapped `condition_occurrence` table
 
 | condition_occurrence_id | person_id | condition_concept_id | condition_start_date | condition_status_concept_id | visit_occurrence_id |
 |---|---|---|---|---|---|
-| 2 | P-001 | `316139` (Heart failure) | 2024-02-01 | `32893` (Confirmed diagnosis) | 2 |
+| 2 | P-001 | `316139` (Heart failure) | 2024-02-01 | *(empty)* | 2 |
 | 3 | P-002 | `316139` (Heart failure) | 2019-11-03 | *(empty)* | *(empty)* |
 | 4 | P-003 | `316139` (Heart failure) | 1900-01-01 | *(empty)* | *(empty)* |
 | 72 | P-001 | `2000005000` (Peri-procedural complication, unspecified) | 2023-11-02 | *(empty)* | 1 |

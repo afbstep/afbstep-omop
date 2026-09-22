@@ -12,7 +12,7 @@ study,optional,"Describes a source study contributing data. Absent when a partne
 study_attribute,optional,"placeholder"
 source,optional,"AFBSTEP extension linking an episode to an externally stored raw file (report, waveform). Absent where the burden was derived purely from numeric assessment with no accompanying file."
 procedure_occurrence,optional,"Referenced by 15 pinned procedure concepts. Tier needs the study team's review."
-visit_occurrence,optional,"Referenced by the pinned visit concepts. Tier needs review."
+visit_occurrence,expected,"Baseline visit ascertainment (concept 2000013017 == Baseline visit) and Case-1 comorbidity dating depend on it. A partner without any visit data simply has none."
 death,optional,"Referenced by the pinned death concepts. Tier needs review."
 device_exposure,optional,"Referenced by the pinned ablation energy source concepts. Tier needs review."
 drug_exposure,optional,"Referenced by the AFBSTEP concomitant-medication concepts. Tier needs review."

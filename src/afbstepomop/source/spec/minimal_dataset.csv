@@ -11,6 +11,7 @@ observation_period,person_id,required,Foreign key to person.
 observation_period,observation_period_start_date,required,Opens the window in which absence of a record means absence of the finding.
 observation_period,observation_period_end_date,required,Closes that window. An open-ended period makes follow-up endpoints uninterpretable.
 observation_period,period_type_concept_id,required,Records how the period was derived. Pinned to 'Period while enrolled in study'.
+visit_occurrence,visit_start_date,required,Date of the visit. Especially importand for determaing the baseline visit.
 condition_occurrence,condition_occurrence_id,required,Primary key.
 condition_occurrence,person_id,required,Foreign key to person.
 condition_occurrence,condition_concept_id,required,The finding itself. Bound to the pinned condition concept set.
@@ -29,7 +30,8 @@ episode,episode_object_concept_id,required,What the episode is about. Required b
 episode,episode_number,expected,Orders repeated episodes within a person. Absent where a site reports a single aggregated window.
 episode_event,episode_id,required,Foreign key to episode.
 episode_event,event_id,required,Identifier of the linked measurement or observation row.
-episode_event,episode_event_field_concept_id,required,Says which table and column event_id points into; the link is unresolvable without it.measurement
+episode_event,episode_event_field_concept_id,required,Says which table and column event_id points into; the link is unresolvable without it
+measurement,measurement_id,required,Primary key
 measurement,person_id,required,Foreign key to person.
 measurement,measurement_concept_id,required,"What was measured. Bound to the pinned measurement concepts, including AF burden as percent time in AF."
 measurement,measurement_date,required,Places the measurement in time.
@@ -38,7 +40,7 @@ measurement,value_as_number,expected,The measured quantity. AF burden is worthle
 measurement,unit_concept_id,expected,Unit of value_as_number. A burden of 30 is uninterpretable without knowing it is a percentage.
 observation,observation_id,required,Primary key.
 observation,person_id,required,Foreign key to person.
-observation,observation_concept_id,required,What was observed. Bound to the pinned AF-burden method and count concepts.
+observation,observation_concept_id,required,What was observed. Bound to the pinned AF-burden method and count concepts. Also used with concept 2000013017 to mark a visit_occurrence row as the protocol's baseline visit (via observation_event_id/obs_event_field_concept_id).
 observation,observation_date,required,Places the observation in time.
 observation,observation_type_concept_id,required,Provenance of the observation.
 device_specs,episode_id,required,Primary key and foreign key to episode.
@@ -49,5 +51,5 @@ device_specs,device_algorithm_v,expected,"Detection algorithm version. Algorithm
 device_specs,device_v,optional,"Device firmware version. Recorded where the site has it; burden stays interpretable without it once the algorithm and its version are known."
 device_exposure,device_concept_id,expected,"The kind of monitor behind an episode. Burden from an implanted device, a patch and a consumer wearable are not the same measurement."
 device_exposure,device_source_value,expected,"Manufacturer and model of the monitor, as the site records it. No standard concept distinguishes one manufacturer's wearable from another's, and detection behaviour differs between them, so the site's own string is what carries it."
-person_study,enrollment_date,expected,"Date the person entered the source study. Anchors per-person follow-up to the study timeline; expected rather than required because person_study itself is optional."
+person_study,enrollment_date,required,"Date the person entered the source study. Anchors per-person follow-up to the study timeline."
 death,cause_concept_id,expected,"Cause of death as a concept. Expected rather than required: a site may record the fact of death without an adjudicated cause."

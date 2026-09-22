@@ -77,3 +77,4 @@ RS,Raw signals,Digital 12-lead ECG waveform,2000010003,"ECG waveforms, device re
 RS,Raw signals,CIED remote-monitoring data extracts,2000010004,"ECG waveforms, device reports and extracts."
 RS,Raw signals,CIED interrogation PDFs,2000010005,"ECG waveforms, device reports and extracts."
 RS,Raw signals,Scanned documents / letters,2000010000,"ECG waveforms, device reports and extracts."
+MC,Methodological Concept,Baseline visit,2000013017,"AFBSTEP methodological concept (not a Part C questionnaire item); marks a visit_occurrence row as the protocol's baseline visit."
