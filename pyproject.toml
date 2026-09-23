@@ -19,11 +19,6 @@ example_pipeline = [
     "numpy>=2.5.2",
     "ipykernel>=7.3.0",
 ]
-analysis_tables = [
-    "duckdb>=1.0",
-    "pandas>=3.0.5",
-    "pyarrow>=15",
-]
 
 [dependency-groups]
 dev = [
@@ -44,5 +39,5 @@ where = ["src"]
 # The specification is data shipped inside the package: without this, a wheel
 # contains the loaders but none of the DDL or CSV files they read.
 [tool.setuptools.package-data]
-afbstepomop = ["source/**/*", "analysis_tables/sql/*"]
+afbstepomop = ["source/**/*"]
 
